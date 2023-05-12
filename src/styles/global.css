@@ -1,0 +1,112 @@
+/* 
+----------------------------------------
+****************************************
+    
+    GLOBAL STYLES ARE DEFINED HERE
+
+****************************************
+----------------------------------------
+*/
+
+.btn.btn-primary:disabled {
+  background-color: #244000;
+}
+
+.btn .loading {
+  margin-left: 0.4em;
+  height: 1.5em;
+  width: 1.5em;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-left: 2px solid transparent;
+  transition: all 300ms ease-in-out;
+  animation: load 400ms ease-in-out forwards infinite;
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.btn.custom-btn {
+  padding: 0.8em 2.5em;
+  border-radius: 2em;
+}
+
+.btn.custom-btn.sm {
+  padding: 0.5em 1.5em;
+  font-size: 0.95em;
+}
+
+.btn-primary {
+  background-color: #3a6600;
+  border: #3a6600;
+}
+
+.btn-primary:hover {
+  background-color: #2a4a01;
+  border: #2a4a01;
+}
+
+.btn-text {
+  background-color: transparent;
+  color: #757575;
+}
+
+.btn-text:hover,
+.btn-text:active,
+.btn-text:focus {
+  background-color: transparent !important;
+  color: #000000 !important;
+  border: 1px solid white !important;
+  outline: none !important;
+}
+
+.btn-outline {
+  background: none;
+  border: 1.5px solid #262626;
+  color: #262626;
+}
+
+.btn-outline:hover {
+  background: #3a6600;
+  border: 1.5px solid #3a6600;
+  color: white;
+}
+
+.main-container {
+  margin: 0 auto;
+  padding: 0 3em;
+}
+
+.carousel-item {
+  min-height: 30em;
+  height: 30em;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  border-radius: 0.3em;
+  object-position: center center;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+section {
+  padding: 4em 0;
+}
+
+section .section-heading {
+  font-weight: 600;
+}
+
+.fs-7 {
+  font-size: 0.9rem;
+}

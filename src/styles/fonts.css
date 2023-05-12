@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Eina";
+  src: url(../assets/fonts/Eina-Regular.ttf);
+}
+
+body {
+  font-family: Eina !important;
+}
