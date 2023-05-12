@@ -1,23 +1,9 @@
 import { getSession } from "next-auth/react";
 
 import CheckoutUI from "@/ui/Checkout";
-import Header from "@/components/Header";
-import { Suspense } from "react";
 
-export default function Cart({ loading, user }) {
-  if (loading)
-    return (
-      <>
-        <Header />
-        <p>Loading.....</p>;
-      </>
-    );
-
-  return (
-    <Suspense fallback={<div>Loading from suspense</div>}>
-      <CheckoutUI user={user} />
-    </Suspense>
-  );
+export default function Cart({ user }) {
+  return <CheckoutUI user={user} />;
 }
 
 Cart.Auth = true;

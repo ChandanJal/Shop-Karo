@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Header from "@/components/Header";
 import { getCartItems } from "@/store/entities/carts";
 
 import Items from "./Items";
@@ -17,7 +16,6 @@ export default function Checkout({ user }) {
 
   return (
     <>
-      <Header />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-8 col-lg-8 mb-3">

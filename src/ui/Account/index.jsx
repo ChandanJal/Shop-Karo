@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
-import Header from "@/components/Header";
 import Button from "@/components/common/Button";
 import KeyValue from "../Checkout/KeyValue";
 
@@ -17,7 +16,6 @@ export default function Account({ user, data }) {
 
   return (
     <>
-      <Header />
       <div className="account-content">
         <div className="account-bg"></div>
         <div className="container">

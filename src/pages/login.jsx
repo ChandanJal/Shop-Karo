@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import Button from "@/components/common/Button";
 import CheckBox from "@/components/Input/CheckBox";
 import Input from "@/components/Input";
-import Header from "@/components/Header";
 
 const schema = Yup.object({
   username: Yup.string().label("Username").required("Enter username"),
@@ -49,7 +48,6 @@ export default function Login() {
 
   return (
     <>
-      <Header />
       <div className="login-section">
         <div className="d-flex justify-content-center align-items-center h-50">
           <div className="login-card">

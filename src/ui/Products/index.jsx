@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import _ from "lodash";
 
-import Header from "@/components/Header";
-
 import Categories from "./Categories";
 import ItemsHeader from "./ItemsHeader";
 import Products from "./Products";
@@ -36,7 +34,6 @@ export default function ProductsUI({ categories, data }) {
 
   return (
     <>
-      <Header />
       <div className="container">
         <div className="row mt-5 p-0">
           <div className="col-3">

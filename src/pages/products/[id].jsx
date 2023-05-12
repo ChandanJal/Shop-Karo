@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-import Header from "@/components/Header";
 import Rating from "@/components/Rating";
 
 import Button, { OutlineButton } from "@/components/common/Button";
@@ -35,7 +34,6 @@ export default function ProductDetail({ product }) {
 
   return (
     <>
-      <Header />
       <div className="container product-details">
         <div className="mt-5">
           <div className="row">

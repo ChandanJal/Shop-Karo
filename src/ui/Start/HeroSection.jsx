@@ -21,7 +21,7 @@ export default function HeroSection() {
           <Image src="/assets/banner-iphone.jpg" fill className="d-block position-relative" alt="Banner Image" />
 
           <div className="carousel-content one">
-            <h1 className="fw-bold">Get You iPhone Right Now.</h1>
+            <h1 className="fw-bold">Get Your iPhone Right Now.</h1>
             <p className="mb-5">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae at dolores assumenda dignissimos
               enim? Libero nulla, inventore repudiandae nobis officiis, eveniet consectetur possimus odio cupiditate

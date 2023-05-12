@@ -13,6 +13,7 @@ import "@/styles/fonts.css";
 import "@/styles/styles.scss";
 
 import Auth from "@/components/Auth";
+import Layout from "@/components/Layout";
 
 const store = configureStore();
 
@@ -28,10 +29,14 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         <SessionProvider session={session}>
           {Component.Auth ? (
             <Auth>
-              <Component {...pageProps} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </Auth>
           ) : (
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           )}
         </SessionProvider>
       </Provider>

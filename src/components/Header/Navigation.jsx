@@ -36,7 +36,7 @@ const navs = [
   {
     id: 4,
     label: "What's New",
-    href: "/what-new",
+    href: "/products",
   },
   {
     id: 5,

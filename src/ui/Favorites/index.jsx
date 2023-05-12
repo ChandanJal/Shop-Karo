@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillDelete } from "react-icons/ai";
 import { useRouter } from "next/router";
 
-import {
-  getFavorites,
-  clearAllFavorites,
-  removeFavorite,
-} from "@/store/entities/favorites";
+import { getFavorites, clearAllFavorites, removeFavorite } from "@/store/entities/favorites";
 
 import { TextButton } from "@/components/common/Button";
 import CartProductCard from "@/components/CartProductCard";
@@ -34,7 +30,6 @@ export default function Favorites() {
 
   return (
     <>
-      <Header />
       <div className="container">
         <div className="d-flex justify-content-between align-items-center mt-5 mb-5">
           <h2 className="fw-bold">Your Favorites !</h2>
@@ -44,10 +39,7 @@ export default function Favorites() {
         </div>
         <div className="row">
           {favorites.map((product) => (
-            <div
-              className="col-6 col-md-4 col-lg-3"
-              key={`_favorite_item_${product.id}`}
-            >
+            <div className="col-6 col-md-4 col-lg-3" key={`_favorite_item_${product.id}`}>
               <CartProductCard
                 {...product}
                 onClick={() => handleClick(product)}
