@@ -1,7 +1,32 @@
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import ProductsUI from "@/ui/Products";
 
+import { capitalize } from "@/utils/text-helper";
+
 export default function Products({ data, categories }) {
-  return <ProductsUI categories={categories} data={data} />;
+  const { query } = useRouter();
+
+  const getTitleContent = () => (query?.category ? `${capitalize(query.category)} Products` : "All Products");
+
+  const getDescriptionContent = () =>
+    query?.category ? `Check out all ${query.category}.` : "Check out all the products";
+
+  return (
+    <>
+      <Head>
+        <title>{getTitleContent()}</title>
+
+        <meta name="description" content={getDescriptionContent()} key="desc" />
+
+        <meta name="og:description" content={getDescriptionContent()} />
+
+        <meta name="og:image" content="/favicon.ico" />
+      </Head>
+      <ProductsUI categories={categories} data={data} />
+    </>
+  );
 }
 
 export async function getServerSideProps(context) {
