@@ -18,35 +18,62 @@ const slice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    productLoadRequested: (state, action) => {
+    productsLoadRequested: (state, action) => {
       state.loading = true;
     },
 
-    productLoadRequestFailed: (state, action) => {
+    productsLoadRequestFailed: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
 
-    productLoaded: (state, action) => {
+    productsLoaded: (state, action) => {
       state.total = action.payload.total;
       state.limit = action.payload.limit;
       state.skip = action.payload.skip;
 
       const oldProducts = state.products;
-      oldProducts.push(...action.payload.products);
+
+      const set = new Set(state.products.map((p) => p.id));
+      action.payload.products.forEach((p) => {
+        if (!set.has(p.id)) oldProducts.push(p);
+      });
+
       state.products = oldProducts;
 
       state.loading = false;
       state.error = null;
     },
 
-    productPageIncreased: (state, action) => {
+    productsLoadedWithCategory: (state, action) => {
+      const newProducts = action.payload;
+      const set = new Set(state.products.map((p) => p.id));
+
+      newProducts.map((p) => {
+        if (!set.has(p.id)) state.products.push(p);
+      });
+
+      state.loading = false;
+    },
+
+    productsPageIncreased: (state, action) => {
       state.page++;
+    },
+
+    productsReset: (state, action) => {
+      return initialState;
     },
   },
 });
 
-const { productLoaded, productLoadRequestFailed, productLoadRequested, productPageIncreased } = slice.actions;
+const {
+  productsLoadRequestFailed,
+  productsLoadRequested,
+  productsLoaded,
+  productsPageIncreased,
+  productsReset,
+  productsLoadedWithCategory,
+} = slice.actions;
 export default slice.reducer;
 
 // use thunk here
@@ -63,17 +90,36 @@ export const fetchProducts = () => async (dispatch, getState) => {
   }
 
   try {
-    dispatch(productLoadRequested());
+    dispatch(productsLoadRequested());
 
     const res = await fetch(`https://dummyjson.com/products?limit=8&skip=${page ? _LIMIT * (parseInt(page) - 1) : 0}`);
     const data = await res.json();
 
-    dispatch(productLoaded(data));
+    dispatch(productsLoaded(data));
 
-    dispatch(productPageIncreased());
+    dispatch(productsPageIncreased());
   } catch (e) {
-    dispatch(productLoadRequestFailed());
+    dispatch(productsLoadRequestFailed());
+  }
+};
+
+export const fetchProductsByCategory = (category) => async (dispatch, getState) => {
+  try {
+    dispatch(productsLoadRequested());
+
+    const res = await fetch(`https://dummyjson.com/products/category/${category}`);
+    const data = await res.json();
+
+    dispatch(productsLoadedWithCategory(data.products));
+  } catch (e) {
+    dispatch(productsLoadRequestFailed(e));
   }
 };
 
 export const getProducts = (state) => state.entities.products.products;
+
+export const getProductsIsLoading = (state) => state.entities.products.loading;
+
+export const resetProcuts = (payload) => productsReset(payload);
+
+export const addProducts = (data) => productsLoaded(data);

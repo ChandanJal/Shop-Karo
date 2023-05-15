@@ -1,46 +1,40 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+import { useRouter } from "next/router";
 
-import { fetchProducts, getProducts } from "@/store/entities/products";
+import { fetchProducts, fetchProductsByCategory, getProducts, getProductsIsLoading } from "@/store/entities/products";
+
+import InteractionObserver from "@/components/InteractionObserver";
 
 import Categories from "./Categories";
 import ItemsHeader from "./ItemsHeader";
 import Products from "./Products";
-import { useRouter } from "next/router";
 
 export default function ProductsUI({ categories, data }) {
   const dispatch = useDispatch();
-  const allProducts = useSelector(getProducts);
   const { query } = useRouter();
+  const { category } = query;
+  const allProducts = useSelector(getProducts);
+  const isProductLoading = useSelector(getProductsIsLoading);
 
-  const [sort, setSort] = useState({ path: "id", order: "asc" });
+  const [sort, setSort] = useState();
 
-  const observerTarget = useRef(null);
+  const handleFetch = () => {
+    if (!category) dispatch(fetchProducts());
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          console.log("fetching data");
-          dispatch(fetchProducts());
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (observerTarget.current) observer.observe(observerTarget.current);
-
-    return () => {
-      if (observerTarget.current) observer.unobserve(observerTarget.current);
-    };
-  }, [observerTarget]);
+    if (category && category !== "") {
+      dispatch(fetchProductsByCategory(category));
+    }
+  }, [category]);
 
   let items = allProducts;
 
   if (sort) items = _.orderBy(allProducts, [sort.path], [sort.order]);
 
-  if (query.category) items = items.filter((i) => i.category === query.category);
+  if (category && category !== "") items = items.filter((i) => i.category === category);
 
   return (
     <>
@@ -51,8 +45,16 @@ export default function ProductsUI({ categories, data }) {
           </div>
           <div className="col-9">
             <ItemsHeader setSort={setSort} />
-            <Products products={items} />
-            <div ref={observerTarget} style={{ height: "1em" }}></div>
+
+            <InteractionObserver onInteracted={handleFetch}>
+              <Products products={items} />
+            </InteractionObserver>
+
+            {isProductLoading && (
+              <div className="d-flex justify-content-center align-items-center mb-2">
+                <div className="loading"></div>
+              </div>
+            )}
 
             <div>
               <p className="text-center">

@@ -514,3 +514,25 @@
   top: 7em;
   // overflow-y: scroll;
 }
+
+.loading {
+  height: 2em;
+  width: 2em;
+  border: 2px solid red;
+  border-left: 2px solid transparent;
+  border-radius: 50%;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  animation: loading 1s ease-in-out infinite forwards;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
