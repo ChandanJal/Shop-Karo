@@ -508,3 +508,9 @@
     transform: scale(5);
   }
 }
+
+.category-list {
+  position: sticky;
+  top: 7em;
+  // overflow-y: scroll;
+}

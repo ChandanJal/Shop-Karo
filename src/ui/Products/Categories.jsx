@@ -15,14 +15,10 @@ export default function Categories({ categories }) {
   };
 
   return (
-    <div className="cart-container position-sticky">
+    <div className="cart-container category-list">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h4 className="fw-bold m-0">Categories</h4>
-        <TextButton
-          Icon={MdDelete}
-          className="p-0"
-          onClick={() => handleCheck(false)}
-        >
+        <TextButton Icon={MdDelete} className="p-0" onClick={() => handleCheck(false)}>
           Clear All
         </TextButton>
       </div>

@@ -1,6 +1,6 @@
-import Start from "@/ui/Start";
-
 import Head from "next/head";
+
+import Start from "@/ui/Start";
 
 export default function Home() {
   return (
