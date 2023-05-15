@@ -22,6 +22,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     <>
       <Head>
         <title>Shop Karo</title>
+        <meta name="theme-color" content="#3a6600" />
       </Head>
       <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" />
 
