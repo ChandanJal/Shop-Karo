@@ -51,9 +51,16 @@ export default slice.reducer;
 
 // use thunk here
 export const fetchProducts = () => async (dispatch, getState) => {
-  const { page } = getState().entities.products;
+  const { page, total, skip, limit } = getState().entities.products;
 
-  // check whether it is last page or not chek if alreadty
+  // check whether it is last page
+  // if it is last page then there is no need to make any request
+  if (total !== null) {
+    const totalPages = Math.ceil(total / Math.max(limit, _LIMIT));
+    const currentPage = skip / Math.max(limit, _LIMIT) + 1;
+
+    if (currentPage >= totalPages) return;
+  }
 
   try {
     dispatch(productLoadRequested());
