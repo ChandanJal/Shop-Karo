@@ -3,10 +3,11 @@ import Head from "next/head";
 
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import "bootstrap/dist/css/bootstrap.css";
 
-import configureStore from "@/store/configureStore";
+import { store, persistor } from "@/store/configureStore";
 
 import "@/styles/global.css";
 import "@/styles/fonts.css";
@@ -14,8 +15,6 @@ import "@/styles/styles.scss";
 
 import Auth from "@/components/Auth";
 import Layout from "@/components/Layout";
-
-const store = configureStore();
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -27,19 +26,21 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" />
 
       <Provider store={store}>
-        <SessionProvider session={session}>
-          {Component.Auth ? (
-            <Auth>
+        <PersistGate loading={null} persistor={persistor}>
+          <SessionProvider session={session}>
+            {Component.Auth ? (
+              <Auth>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </Auth>
+            ) : (
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-            </Auth>
-          ) : (
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          )}
-        </SessionProvider>
+            )}
+          </SessionProvider>
+        </PersistGate>
       </Provider>
     </>
   );

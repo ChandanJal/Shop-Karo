@@ -7,10 +7,10 @@ import { RadioButton } from "@/components/Input";
 import { capitalize } from "@/utils/text-helper";
 
 export default function Categories({ categories }) {
-  const { push, query } = useRouter();
+  const { push, query, prefetch } = useRouter();
 
   const handleCheck = (checked, category) => {
-    if (checked) push({ pathname: "/products", query: { category } });
+    if (checked) push({ pathname: "/products", query: { category } }, null);
     else push("/products");
   };
 
